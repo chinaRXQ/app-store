@@ -133,6 +133,7 @@
       },
       listShow () {
         if (!this.totalCount) {
+          // eslint-disable-next-line
           this.fold = true;
           return false;
         }
@@ -204,11 +205,6 @@
 <style lang="stylus" rel="stylesheet/stylus">
   .drop-enter-active
     transition: all 0.4s cubic-bezier(0.49, -0.29, 0.75, 0.41)
-
-  .foldList-enter-active
-    transition: all 0.5s
-  .foldList-enter,.foldList-leave
-    transform: translate3d(0, 0, 0)
 
   .shopcart
     position: fixed
@@ -318,4 +314,8 @@
       background: #fff
       transition: all 0.5s ease
       transform: translate3d(0, -100%, 0)
+      &.foldList-enter-active
+        transform: translate3d(0, -100%, 0)
+      &.foldList-enter, &.foldList-leave-to
+        transform: translate3d(0, 0, 0)
 </style>
