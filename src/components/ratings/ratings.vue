@@ -29,6 +29,35 @@
                     :onlyContent="onlyContent"
                     :desc="desc"
                     :ratings="ratings"></ratingselect>
+      <div class="rating-wrapper">
+        <ul>
+          <li v-for="(rating,index) in ratings" class="rating-item" :key="index">
+            <div class="avatar">
+              <img width="28" height="28" :src="rating.avatar">
+            </div>
+            <div class="content">
+              <h1 class="name">{{ rating.username}}</h1>
+              <div class="star-wrapper">
+                <star :size="24" :score="rating.score"></star>
+                <span class="delivery" v-show="rating.deliveryTime">
+                  {{rating.deliveryTime}}
+                </span>
+              </div>
+              <p class="text">{{rating.text}}</p>
+              <div class="recommend" v-show="rating.recommend &&
+              rating.recommend.length">
+                <span class="icon-thumb_up"></span>
+                <span v-for="(item,index) in rating.recommend" :key="index">
+                  {{item}}
+                </span>
+              </div>
+              <div class="time">
+                {{rating.rateTime | formatDate}}
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -37,6 +66,7 @@
   import star from 'components/star/star';
   import ratingselect from 'components/ratingselect/ratingselect';
   import split from 'components/split/split';
+  import {formatDate} from 'common/js/date';
 
   const ALL = 2;
   const ERR_OK = 0;
@@ -61,6 +91,12 @@
           this.ratings = response.data;
         }
       });
+    },
+    filters: {
+      formatDate (time) {
+        let date = new Date(time);
+        return formatDate(date, 'yyyy-MM-dd hh:mm');
+      }
     },
     components: {
       star,
