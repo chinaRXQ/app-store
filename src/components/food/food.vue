@@ -36,8 +36,8 @@
             <ratingselect :selectType="selectType"
                           :onlyContent="onlyContent"
                           :desc="desc"
-                          :ratings="food.ratings" @ratingTypeSelect="ratingTypeSelect"
-                          @contentToggle="contentToggle"></ratingselect>
+                          :ratings="food.ratings" @selectRating="selectRating"
+                          @toggleContent="toggleContent"></ratingselect>
           </div>
           <div class="rating-wrapper">
             <ul v-show="food.ratings && food.ratings.length">
@@ -130,14 +130,14 @@
           return type === this.selectType;
         }
       },
-      ratingTypeSelect (type) {
+      selectRating (type) {
         this.selectType = type;
         this.$nextTick(() => {
           this.scroll.refresh();
         });
       },
-      contentToggle (onlyContent) {
-        this.onlyContent = onlyContent;
+      toggleContent () {
+        this.onlyContent = !this.onlyContent;
         this.$nextTick(() => {
           this.scroll.refresh();
         });

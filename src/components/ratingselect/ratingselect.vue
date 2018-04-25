@@ -65,18 +65,14 @@
       select (type, event) {
         if (!event._constructed) {
           return;
-        }
-        ;
-        this.selectType = type;
-        this.$emit('ratingTypeSelect', type);
+        };
+        this.$emit('selectRating', type);
       },
       toggleContent (event) {
         if (!event._constructed) {
           return;
-        }
-        ;
-        this.onlyContent = !this.onlyContent;
-        this.$emit('contentToggle', this.onlyContent);
+        };
+        this.$emit('toggleContent');
       }
     }
   };
